@@ -1,101 +1,92 @@
-#include<stdio.h>
-int  a[5],pos=-1;
-void insert(int e)
-{
-	if(pos+1==5)
-	{
-		printf("Error:Array is Full");
+#include <stdio.h>
+int a[5], pos=-1;
+int insert(int e, int a[]){
+	if(pos+1==5){
+		printf("Error: Array full");
 	}
-	else
-	{
+	else{
 		a[++pos]=e;
 	}
 }
-void dellete()
-{
-	if(pos==-1)
-	{
-		printf("Error:Array is empty");
-	}
-	else
-	{
-		printf("\n%d",a[pos--]);
+int search(){
+	int s,i;
+	printf("Enter element to be searched:");
+	scanf("%d", &s);
+	for(i=0;i<5;i++){
+		if(a[i]==s){
+			printf("Element found at position: %d",i);
+		}
 	}
 }
-void sort()
-{
+int sort(){
 	int i,j,temp=0;
-	if(pos==-1)
-	{
-		printf("Array empty");
+	if(pos==-1){
+		printf("Error: Array empty");
 	}
-	for(i=0;i<=pos;i++)
-	{
-		for(j=j+1;j<=pos;j++)
-		{
-			if(a[i]>a[j])
-			{
+	for(i=0;i<5;i++){
+		for(j=i+1;j<=pos;j++){
+			if(a[i]>a[j]){
 				temp=a[i];
 				a[i]=a[j];
 				a[j]=temp;
 			}
 		}
 	}
-	printf("Sorted form:");
-	for(i=0;i<=pos;i++)
-	{
-		printf("%d\t",a[i]);
+	printf("Array is sorted!");
+	for(i=0;i<=pos;i++){
+		printf("\n %d", a[i]);
 	}
 	
 }
-void display()
-{
-	int i;
-	for(i=0;i<=pos;i++)
-	{
-		printf("%d\t",a[i]);
+void deletee(){
+	if(pos==-1){
+		printf("Error: Array empty");
 	}
-	printf("\n");
+	else{
+		printf("\n %d", a[pos--]);
+	}
 }
-int menu()
-{
+int menu(){
 	int ch;
-	printf("\nINSERT-1\nDELETE-2\nDISP-3\nSORT-4\nEXIT-5\nEnter your choice");
+	printf("\n 1.INSERT \n 2.DELETE \n 3.DISPLAY ALL \n 4.SEARCH \n 5.SORT \n 6.EXIT \n Enter your choice:");
 	scanf("%d",&ch);
 	return ch;
 }
-void processArray()
-{
-    int ch;
-    for(ch=menu();ch!=5;ch=menu())
-    {
-    	switch(ch)
-    	{
-    		case 1:
-			    printf("enter the value to be inserted:");
-    	     	scanf("%d",&ch);
-    	    	insert(ch);
-    	    	break;
-    	    case 2:
-			    dellete();
+void display(){
+	int i;
+	for(i=0;i<=pos;i++){
+		printf("\n %d", a[i]);
+	}
+}
+void processArray(){
+	int ch;
+	for(ch=menu();ch!=6;ch=menu()){
+		switch(ch){
+			case 1:
+				printf("\n Enter the value to insert:");
+				scanf("%d",&ch);
+				insert(ch);
+				break;
+			case 2:
+				deletee();
 				break;
 			case 3:
-			    display();
+				display();
 				break;
 			case 4:
-				sort();
+				search();
 				break;
 			case 5:
-			    break;    	
+				sort();
+				break;
+			
 			default:
-			    printf("Error:wrong choice");
-				break;				
-    	    		
+				printf("\n Error : Wrong Choice!");
+				break;
 		}
-	}   
+	}
 }
-int main()
-{
+int main(){
 	processArray();
 	return 0;
 }
